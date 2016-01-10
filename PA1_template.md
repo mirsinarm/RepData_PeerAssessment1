@@ -91,14 +91,14 @@ steps_imputed$steps <- steps_imputed$imputed
 steps_imputed <- select(steps_imputed, steps, date, interval)
 
 # histogram
-hist(steps_imputed$steps, col='GRAY')
+imputed_total_steps_day <- group_by(steps_imputed, date) %>% summarise(daily_sum = sum(steps))
+hist(imputed_total_steps_day$daily_sum, col='GRAY', breaks=10, main="Histogram of total steps taken per day", xlab="step count")
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-4-1.png) 
 
 ```r
 # mean and median of steps per day
-imputed_total_steps_day <- group_by(steps_imputed, date) %>% summarise(daily_sum = sum(steps))
 mean(imputed_total_steps_day$daily_sum) # 10766.19
 ```
 
